@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML構造化要素の学習</title>
+    <!-- CSSを追加して構造を視覚的に理解しやすくする -->
+    <style>
+      header,
+      nav,
+      main,
+      section,
+      article,
+      aside,
+      footer {
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      header {
+        background-color: #e3f2fd;
+      }
+      nav {
+        background-color: #e8f5e9;
+      }
+      main {
+        background-color: #fff9c4;
+      }
+      section {
+        background-color: #f3e5f5;
+      }
+      article {
+        background-color: #ffecb3;
+      }
+      aside {
+        background-color: #e1f5fe;
+      }
+      footer {
+        background-color: #fbe9e7;
+      }
+      .comment {
+        color: #888;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ヘッダー：ページの上部に表示される要素 -->
+    <header>
+      <h1>HTML構造化要素の例</h1>
+      <p>HTMLはWebページの骨格となる構造を定義します</p>
+    </header>
+
+    <!-- ナビゲーション：サイト内の移動メニュー -->
+    <nav>
+      <h2>サイトナビゲーション</h2>
+      <ul>
+        <li><a href="#section1">セクション1</a></li>
+        <li><a href="#section2">セクション2</a></li>
+        <li><a href="#section3">セクション3</a></li>
+      </ul>
+    </nav>
+
+    <!-- メインコンテンツ：ページの主要部分 -->
+    <main>
+      <h2>メインコンテンツ</h2>
+
+      <!-- セクション：コンテンツをテーマごとにグループ化 -->
+      <section id="section1">
+        <h3>セクション1: リスト要素</h3>
+        <p>HTMLには順序なしリストと順序付きリストがあります</p>
+
+        <h4>順序なしリスト (ul)</h4>
+        <ul>
+          <li>リンゴ</li>
+          <li>バナナ</li>
+          <li>ブドウ</li>
+        </ul>
+
+        <h4>順序付きリスト (ol)</h4>
+        <ol>
+          <li>最初のステップ</li>
+          <li>次のステップ</li>
+          <li>最後のステップ</li>
+        </ol>
+      </section>
+
+      <!-- 記事：独立したコンテンツを表す -->
+      <article id="section2">
+        <h3>セクション2: テーブル要素</h3>
+        <p>テーブルは情報を行と列で表示します</p>
+
+        <table>
+          <caption>
+            ユーザー情報
+          </caption>
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>年齢</th>
+              <th>性別</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>山田太郎</td>
+              <td>25</td>
+              <td>男性</td>
+            </tr>
+            <tr>
+              <td>佐藤花子</td>
+              <td>30</td>
+              <td>女性</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <!-- フォームセクション -->
+      <section id="section3">
+        <h3>セクション3: フォーム要素</h3>
+        <p>フォームはユーザー入力を収集します</p>
+
+        <form>
+          <fieldset>
+            <legend>ユーザー登録</legend>
+            <div>
+              <label for="name">名前:</label>
+              <input type="text" id="name" placeholder="名前" />
+            </div>
+            <div>
+              <label for="email">メールアドレス:</label>
+              <input type="email" id="email" placeholder="メールアドレス" />
+            </div>
+            <div>
+              <label for="password">パスワード:</label>
+              <input type="password" id="password" placeholder="パスワード" />
+            </div>
+            <div>
+              <input type="submit" value="送信" />
+            </div>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+
+    <!-- サイドバー：補足情報 -->
+    <aside>
+      <h3>補足情報</h3>
+      <p>HTMLの主要セマンティック要素:</p>
+      <ul>
+        <li>header - ヘッダー領域</li>
+        <li>nav - ナビゲーション</li>
+        <li>main - メインコンテンツ</li>
+        <li>section - セクション</li>
+        <li>article - 独立したコンテンツ</li>
+        <li>aside - サイドバー</li>
+        <li>footer - フッター領域</li>
+      </ul>
+      <figure>
+        <img
+          src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+          alt="Google"
+          width="200"
+        />
+        <figcaption>図：Googleのロゴ</figcaption>
+      </figure>
+    </aside>
+
+    <!-- フッター：ページの最下部情報 -->
+    <footer>
+      <p>© 2023 HTML構造化要素の学習</p>
+      <address>連絡先: <a href="mailto:example@example.com">example@example.com</a></address>
+    </footer>
+  </body>
+</html>
