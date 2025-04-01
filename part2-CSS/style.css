@@ -1,0 +1,61 @@
+/* ページ全体の基本スタイル */
+body {
+  font-family: sans-serif; /* 基本フォント */
+  background-color: #f5f5f5; /* 薄いグレーの背景色 */
+  color: #333; /* 暗めの文字色 */
+  line-height: 1.6; /* 行間 */
+  margin: 0;
+  padding: 0;
+}
+
+/* コンテナのスタイル - フレックスボックスレイアウトを使用 */
+.container {
+  display: flex; /* 子要素を横並びにする */
+  gap: 20px; /* 子要素間の間隔を設定 */
+  justify-content: center; /* 子要素を中央に配置 */
+  padding: 20px; /* コンテナ内の余白 */
+}
+
+/* カードのスタイル - 基本的な箱のデザイン */
+.card {
+  position: relative; /* 疑似要素の位置決めの基準点とするため */
+  background-color: white;
+  width: 200px;
+  padding: 20px;
+  border-radius: 12px; /* 角を丸くする */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影をつける */
+  transition: transform 0.3s, box-shadow 0.3s; /* アニメーション効果の設定 */
+}
+
+/* ホバー時のカードスタイル - マウスを乗せたときの効果 */
+.card:hover {
+  transform: translateY(-5px); /* 上に5px移動 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 影を濃くする */
+}
+
+/* 疑似要素を使った装飾 - カード上部のグラデーションライン */
+.card::before {
+  content: ''; /* 疑似要素には必ずcontentプロパティが必要 */
+  position: absolute; /* カードに対して絶対位置で配置 */
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(to right, #00c6ff, #0072ff); /* 左から右へのグラデーション */
+  border-top-left-radius: 12px; /* 左上の角を丸くする */
+  border-top-right-radius: 12px; /* 右上の角を丸くする */
+}
+
+/* カードタイトルのスタイル */
+.card-title {
+  font-size: 1.2em; /* 文字サイズを大きくする */
+  font-weight: bold; /* 太字にする */
+  margin-top: 10px;
+}
+
+/* カードテキストのスタイル */
+.card-text {
+  font-size: 0.9em; /* 文字サイズを小さくする */
+  color: #555; /* グレーの文字色 */
+  margin-top: 8px;
+}

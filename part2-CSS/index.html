@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSSデザインサンプル</title>
+    <link href="./style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div style="text-align: center; padding: 20px 0">
+      <h1>CSSデザインサンプル</h1>
+      <p>
+        下記のカードは、CSSを使ってデザインされています。<br />各カードにホバーすると効果が適用されます。
+      </p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <div class="card-title">カード1</div>
+        <div class="card-text">これはシンプルなボックスデザインです。</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">カード2</div>
+        <div class="card-text">ホバーすると浮き上がります。</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">カード3</div>
+        <div class="card-text">上部にグラデーションのラインが表示されます。</div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 40px; padding: 0 20px">
+      <h2>CSSで実現している効果</h2>
+      <ul style="display: inline-block; text-align: left">
+        <li>フレックスボックスを使った横並びレイアウト</li>
+        <li>ボックスシャドウによる影の表現</li>
+        <li>トランジションによるアニメーション効果</li>
+        <li>疑似要素（::before）を使った装飾</li>
+        <li>ホバー時の変化（浮き上がり効果）</li>
+      </ul>
+    </div>
+  </body>
+</html>
