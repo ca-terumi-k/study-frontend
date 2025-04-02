@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS position プロパティの理解</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-bottom: 1000px; /* scrollの動作を見るための余白 */
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        .container {
+            margin: 30px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            position: relative; /* 親要素にrelativeを設定 */
+            height: 300px;
+            overflow: auto;
+        }
+
+        .small-container {
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            padding: 10px;
+            height: 200px;
+            position: relative;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #eee;
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* position: static のスタイル */
+        .static {
+            position: static;
+            background-color: #ffdddd;
+            border: 2px solid #ff0000;
+        }
+
+        /* position: relative のスタイル */
+        .relative {
+            position: relative;
+            top: 20px;
+            left: 20px;
+            background-color: #ddffdd;
+            border: 2px solid #00ff00;
+        }
+
+        /* position: absolute のスタイル */
+        .absolute {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            background-color: #ddddff;
+            border: 2px solid #0000ff;
+        }
+
+        /* position: fixed のスタイル */
+        .fixed {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffddff;
+            border: 2px solid #ff00ff;
+            z-index: 100;
+        }
+
+        /* position: sticky のスタイル */
+        .sticky {
+            position: sticky;
+            top: 0;
+            background-color: #ffffdd;
+            border: 2px solid #ffcc00;
+        }
+
+        .note {
+            background-color: #ffffdd;
+            padding: 10px;
+            border-left: 4px solid #ffcc00;
+            margin: 10px 0;
+        }
+        
+        .property-header {
+            background-color: #eee;
+            padding: 10px;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+
+        .arrow {
+            position: absolute;
+            font-size: 24px;
+            color: #666;
+        }
+
+        .arrow-relative {
+            top: 80px;
+            left: 160px;
+        }
+
+        .reference-box {
+            width: 100px;
+            height: 100px;
+            border: 1px dashed #999;
+            background-color: rgba(200, 200, 200, 0.3);
+            position: absolute;
+            top: 40px;
+            left: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        /* スクロール領域を可視化 */
+        .scroll-area {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .scroll-content {
+            height: 800px;
+            background: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
+            padding: 10px;
+        }
+
+        .scroll-marker {
+            padding: 5px;
+            background-color: #eee;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* 打ち消し効果の説明用スタイル */
+        .reset-demo {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f5f5f5;
+        }
+
+        .reset-box {
+            width: 120px;
+            height: 60px;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-reset {
+            margin: 10px 0;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .demo-container {
+            position: relative;
+            height: 200px;
+            border: 1px dashed #ccc;
+            margin: 20px 0;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .demo-box {
+            width: 120px;
+            height: 70px;
+            background-color: #e0e0ff;
+            border: 2px solid #8080ff;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS position プロパティの視覚的理解</h1>
+
+    <div class="note">
+        <p>このページでは、CSSの<code>position</code>プロパティの各値の特徴と動作を視覚的に説明します。</p>
+    </div>
+
+    <!-- STATIC -->
+    <h2 class="property-header">1. position: static</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>デフォルトの位置（標準的なドキュメントフロー）</li>
+            <li>top, right, bottom, left, z-indexプロパティは効果がない</li>
+            <li>CSSのデフォルト値</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="box static">static</div>
+        <p>上記の要素はposition: staticです。通常のドキュメントフローに従います。</p>
+    </div>
+
+    <!-- STATIC の打ち消し効果 -->
+    <h2 class="property-header">1.1 position: static の打ち消し効果</h2>
+    <div class="note">
+        <p><strong>position: staticの打ち消し効果：</strong></p>
+        <ul>
+            <li>他のposition値（relative, absolute, fixed, sticky）を打ち消す</li>
+            <li>top, right, bottom, left指定を無効にする</li>
+            <li>要素を通常のドキュメントフローに戻す</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h3>Relativeからstaticへのリセット</h3>
+        <div class="demo-container">
+            <div id="demo-relative" class="demo-box" style="position: relative; top: 30px; left: 50px;">
+                position: relative<br>
+                top: 30px, left: 50px
+            </div>
+        </div>
+        <button id="btn-reset-relative" class="btn-reset" onclick="togglePositionRelative()">staticに切り替え/戻す</button>
+        <p>上のボタンをクリックすると、position: relativeからposition: staticに切り替わり、top/left指定が無効になります。</p>
+
+        <h3>Absoluteからstaticへのリセット</h3>
+        <div class="demo-container">
+            <div id="demo-absolute" class="demo-box" style="position: absolute; top: 20px; right: 20px;">
+                position: absolute<br>
+                top: 20px, right: 20px
+            </div>
+        </div>
+        <button id="btn-reset-absolute" class="btn-reset" onclick="togglePositionAbsolute()">staticに切り替え/戻す</button>
+        <p>上のボタンをクリックすると、position: absoluteからposition: staticに切り替わり、ドキュメントフローに戻ります。</p>
+
+        <h3>Stickyからstaticへのリセット</h3>
+        <div class="demo-container" style="overflow-y: auto; height: 150px;">
+            <div style="height: 250px; padding-top: 20px;">
+                <div id="demo-sticky" class="demo-box" style="position: sticky; top: 0; background-color: #ffffcc; border-color: #ddcc00;">
+                    position: sticky<br>
+                    top: 0
+                </div>
+                <div style="height: 100px;"></div>
+                <p>↑ 上にスクロールしてstickyの効果を確認 ↑</p>
+            </div>
+        </div>
+        <button id="btn-reset-sticky" class="btn-reset" onclick="togglePositionSticky()">staticに切り替え/戻す</button>
+        <p>上のボタンをクリックすると、position: stickyからposition: staticに切り替わり、固定効果がなくなります。</p>
+    </div>
+
+    <!-- RELATIVE -->
+    <h2 class="property-header">2. position: relative</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>通常の位置を基準に相対的に配置される</li>
+            <li>元の位置のスペースは保持される</li>
+            <li>top, right, bottom, leftで位置調整が可能</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="reference-box">元の位置</div>
+        <div class="box relative">relative<br>top: 20px<br>left: 20px</div>
+        <div class="arrow arrow-relative">↖</div>
+        <p>上記の要素はposition: relativeです。本来の位置から上に20px、左に20px移動しています。元の位置のスペースは保持されます。</p>
+    </div>
+
+    <!-- ABSOLUTE -->
+    <h2 class="property-header">3. position: absolute</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>通常のドキュメントフローから取り除かれる</li>
+            <li>位置指定されたposition: static以外の最も近い親要素が基準になる</li>
+            <li>親要素が無い場合はhtml要素が基準</li>
+            <li>top, right, bottom, leftで位置を指定</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="box absolute">absolute<br>top: 40px<br>right: 40px</div>
+        <p>上記の要素はposition: absoluteです。コンテナ（親要素、position: relative）の右上から40pxの位置に配置されています。</p>
+        
+        <div class="small-container">
+            <div class="box absolute" style="top: 10px; left: 10px;">absolute<br>nested</div>
+            <p style="margin-top: 120px;">この要素もposition: absoluteで、小さいコンテナの相対位置に配置されています。</p>
+        </div>
+    </div>
+
+    <!-- FIXED -->
+    <h2 class="property-header">4. position: fixed</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>ビューポート（画面）に対して固定される</li>
+            <li>スクロールしても位置が変わらない</li>
+            <li>通常のドキュメントフローから取り除かれる</li>
+            <li>top, right, bottom, leftで位置を指定</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <p>右下に表示されている赤紫色のボックスがposition: fixedです。<br>画面をスクロールしても常に画面の右下に固定されます。</p>
+    </div>
+
+    <!-- 固定位置のボックスを表示 -->
+    <div class="box fixed">fixed<br>bottom: 20px<br>right: 20px</div>
+
+    <!-- STICKY -->
+    <h2 class="property-header">5. position: sticky</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>スクロール位置に応じて相対配置と固定配置が切り替わる</li>
+            <li>親要素の表示範囲内でのみ固定表示する</li>
+            <li>top, right, bottom, leftのいずれかの値が必要</li>
+        </ul>
+    </div>
+
+    <div class="scroll-area">
+        <p>下にスクロールして「position: sticky」の動作を確認してください。</p>
+        
+        <!-- sticky要素 -->
+        <div class="box sticky">sticky<br>top: 0</div>
+
+        <div class="scroll-content">
+            <div class="scroll-marker">スクロール領域</div>
+            <p>「position: sticky」は、スクロール位置に応じて通常の配置と固定配置を切り替えます。</p>
+            <p>ページをスクロールすると、黄色のボックスが上部に固定されますが、この親コンテナ（スクロール領域）から出ると通常の配置に戻ります。</p>
+            
+            <div class="scroll-marker">スクロール中...</div>
+            
+            <p>position: stickyの主な用途：</p>
+            <ul>
+                <li>スクロール中も見えるヘッダー</li>
+                <li>セクションタイトルの固定表示</li>
+                <li>目次やナビゲーションの固定</li>
+            </ul>
+            
+            <div class="scroll-marker">さらにスクロール...</div>
+            
+            <p>このボックスのスクロール位置もチェックしてみてください。</p>
+            <p>スティッキー要素は、親要素の範囲内でのみ「貼り付く」動作をします。親要素がビューから外れると、スティッキー要素も一緒に消えます。</p>
+            
+            <div class="scroll-marker">スクロール終了</div>
+        </div>
+    </div>
+
+    <div class="note" style="margin-top: 30px;">
+        <p><strong>positionプロパティの使い分け：</strong></p>
+        <ul>
+            <li><strong>static:</strong> デフォルト値。特に位置指定が必要ない場合</li>
+            <li><strong>relative:</strong> 通常のフローを維持しながら微調整したい場合、または子要素のposition: absoluteの基準を作る場合</li>
+            <li><strong>absolute:</strong> 親要素に対して特定の位置に配置したい場合（モーダル、ツールチップなど）</li>
+            <li><strong>fixed:</strong> スクロールしても常に画面の同じ位置に表示したい場合（固定ヘッダー、戻るボタンなど）</li>
+            <li><strong>sticky:</strong> スクロールに応じて固定したい要素（追従ナビ、固定ヘッダーなど）</li>
+        </ul>
+    </div>
+
+    <div class="note">
+        <p><strong>注意点：</strong></p>
+        <ul>
+            <li>absoluteとfixedはドキュメントフローから外れるため、他の要素と重なる可能性がある</li>
+            <li>固定位置要素が必要なスペースを確保するよう注意する</li>
+            <li>z-indexを使って重なりの順序を制御できる</li>
+            <li>stickyはIE11でサポートされていない（必要に応じてJavaScriptでフォールバック実装）</li>
+        </ul>
+    </div>
+
+    <script>
+        // position: relativeとstaticの切り替え
+        function togglePositionRelative() {
+            const element = document.getElementById('demo-relative');
+            if (element.style.position === 'relative') {
+                element.style.position = 'static';
+                element.innerHTML = 'position: static<br>（top/leftは無効）';
+            } else {
+                element.style.position = 'relative';
+                element.style.top = '30px';
+                element.style.left = '50px';
+                element.innerHTML = 'position: relative<br>top: 30px, left: 50px';
+            }
+        }
+
+        // position: absoluteとstaticの切り替え
+        function togglePositionAbsolute() {
+            const element = document.getElementById('demo-absolute');
+            if (element.style.position === 'absolute') {
+                element.style.position = 'static';
+                element.innerHTML = 'position: static<br>（ドキュメントフローに戻る）';
+            } else {
+                element.style.position = 'absolute';
+                element.style.top = '20px';
+                element.style.right = '20px';
+                element.innerHTML = 'position: absolute<br>top: 20px, right: 20px';
+            }
+        }
+
+        // position: stickyとstaticの切り替え
+        function togglePositionSticky() {
+            const element = document.getElementById('demo-sticky');
+            if (element.style.position === 'sticky') {
+                element.style.position = 'static';
+                element.innerHTML = 'position: static<br>（固定されなくなる）';
+            } else {
+                element.style.position = 'sticky';
+                element.style.top = '0';
+                element.innerHTML = 'position: sticky<br>top: 0';
+            }
+        }
+    </script>
+</body>
+</html>

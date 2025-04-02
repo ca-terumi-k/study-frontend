@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS display プロパティの理解</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        .container {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        .box {
+            margin: 5px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #999;
+        }
+
+        /* display: block のスタイル */
+        .block {
+            display: block;
+            background-color: #ffdddd;
+            border: 2px solid #ff0000;
+        }
+
+        /* display: inline のスタイル */
+        .inline {
+            display: inline;
+            background-color: #ddffdd;
+            border: 2px solid #00ff00;
+        }
+
+        /* display: inline-block のスタイル */
+        .inline-block {
+            display: inline-block;
+            background-color: #ddddff;
+            border: 2px solid #0000ff;
+        }
+
+        /* display: flex のスタイル */
+        .flex-container {
+            display: flex;
+            background-color: #ffe0cc;
+            border: 2px solid #ff8800;
+            margin-bottom: 10px;
+        }
+
+        .flex-item {
+            background-color: #ffcc99;
+            border: 1px solid #ff8800;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        /* display: grid のスタイル */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            background-color: #e0ccff;
+            border: 2px solid #8800ff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .grid-item {
+            background-color: #ccb3ff;
+            border: 1px solid #8800ff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* display: none のスタイル */
+        .none {
+            display: none;
+        }
+
+        /* 共通のスタイル */
+        .size-demo {
+            width: 200px;
+            height: 50px;
+        }
+
+        .note {
+            background-color: #ffffdd;
+            padding: 10px;
+            border-left: 4px solid #ffcc00;
+            margin: 10px 0;
+        }
+        
+        .property-header {
+            background-color: #eee;
+            padding: 10px;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS display プロパティの視覚的理解</h1>
+
+    <div class="note">
+        <p>このページでは、CSSの<code>display</code>プロパティの各値の特徴と動作を視覚的に説明します。</p>
+    </div>
+
+    <!-- BLOCK -->
+    <h2 class="property-header">1. display: block</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>常に新しい行（改行）から始まる</li>
+            <li>デフォルトで親要素の幅いっぱいに広がる（width: 100%）</li>
+            <li>高さ、幅、マージン、パディングの設定が可能</li>
+            <li>他の要素と横に並ばない</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="box block">これはブロック要素です</div>
+        <div class="box block">これもブロック要素です（改行されます）</div>
+        <div class="box block size-demo">幅と高さを指定したブロック要素</div>
+    </div>
+
+    <!-- INLINE -->
+    <h2 class="property-header">2. display: inline</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>新しい行を作らず、コンテンツの幅だけ占める</li>
+            <li>width、heightプロパティが効かない</li>
+            <li>上下マージンが効かない（左右は有効）</li>
+            <li>他の要素と横に並ぶ</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <span class="box inline">これはインライン要素です</span>
+        <span class="box inline">これもインライン要素です（横に並びます）</span>
+        <span class="box inline">三つ目のインライン要素です</span>
+        <br><br>
+        <span class="box inline size-demo">幅と高さを指定してもインライン要素は無視されます</span>
+    </div>
+
+    <!-- INLINE-BLOCK -->
+    <h2 class="property-header">3. display: inline-block</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>インライン要素のように横に並ぶ</li>
+            <li>ブロック要素のように幅、高さ、マージン、パディングが設定可能</li>
+            <li>インラインとブロックの特性を併せ持つ</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <span class="box inline-block">インラインブロック</span>
+        <span class="box inline-block">横に並びます</span>
+        <span class="box inline-block">スペースが入ります</span>
+        <br><br>
+        <span class="box inline-block size-demo">幅と高さが指定できるインラインブロック</span>
+        <span class="box inline-block size-demo">同じく幅と高さ指定</span>
+    </div>
+
+    <!-- FLEX -->
+    <h2 class="property-header">4. display: flex</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>フレキシブルなレイアウトを実現するためのモデル</li>
+            <li>親要素に<code>display: flex</code>を指定すると子要素が横並びになる</li>
+            <li>子要素の伸縮や配置を柔軟に制御できる</li>
+            <li>一次元（縦または横）のレイアウトに適している</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h3>デフォルトのFlex（row方向）</h3>
+        <div class="flex-container">
+            <div class="flex-item">Flex Item 1</div>
+            <div class="flex-item">Flex Item 2</div>
+            <div class="flex-item">Flex Item 3</div>
+        </div>
+
+        <h3>Flex（column方向）</h3>
+        <div class="flex-container" style="flex-direction: column;">
+            <div class="flex-item">Flex Item 1</div>
+            <div class="flex-item">Flex Item 2</div>
+            <div class="flex-item">Flex Item 3</div>
+        </div>
+    </div>
+
+    <!-- GRID -->
+    <h2 class="property-header">5. display: grid</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>二次元のグリッドレイアウトシステム</li>
+            <li>行と列を定義して複雑なレイアウトを作成できる</li>
+            <li>グリッドアイテムを任意のセルに配置可能</li>
+            <li>二次元（縦と横）のレイアウトに適している</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h3>シンプルな3x3グリッド</h3>
+        <div class="grid-container">
+            <div class="grid-item">Grid Item 1</div>
+            <div class="grid-item">Grid Item 2</div>
+            <div class="grid-item">Grid Item 3</div>
+            <div class="grid-item">Grid Item 4</div>
+            <div class="grid-item">Grid Item 5</div>
+            <div class="grid-item">Grid Item 6</div>
+            <div class="grid-item">Grid Item 7</div>
+            <div class="grid-item">Grid Item 8</div>
+            <div class="grid-item">Grid Item 9</div>
+        </div>
+
+        <h3>異なるサイズのグリッドアイテム</h3>
+        <div class="grid-container">
+            <div class="grid-item" style="grid-column: span 2; grid-row: span 2;">大きい Item</div>
+            <div class="grid-item">Item 2</div>
+            <div class="grid-item">Item 3</div>
+            <div class="grid-item">Item 4</div>
+            <div class="grid-item">Item 5</div>
+            <div class="grid-item">Item 6</div>
+        </div>
+    </div>
+
+    <!-- NONE -->
+    <h2 class="property-header">6. display: none</h2>
+    <div class="note">
+        <p><strong>主な特徴：</strong></p>
+        <ul>
+            <li>要素が完全に非表示になり、レイアウトからも除外される</li>
+            <li>スペースを占めない（visibility: hiddenとの違い）</li>
+            <li>DOM上は存在するが、画面には表示されない</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <p>以下に3つの要素があります：</p>
+        <div class="box block">通常の表示要素</div>
+        <div class="box block none">この要素はdisplay: noneで非表示になっています</div>
+        <div class="box block">これも通常の表示要素</div>
+
+        <p>比較：visibility: hidden（スペースは保持されます）</p>
+        <div class="box block">通常の表示要素</div>
+        <div class="box block" style="visibility: hidden;">この要素はvisibility: hiddenで非表示ですが、スペースは占めています</div>
+        <div class="box block">これも通常の表示要素</div>
+    </div>
+
+    <div class="note" style="margin-top: 30px;">
+        <p><strong>用途に応じたdisplayプロパティの選び方：</strong></p>
+        <ul>
+            <li><strong>block:</strong> 段落や見出し、セクションなどのコンテンツブロックに</li>
+            <li><strong>inline:</strong> テキスト内の一部をマークアップする場合に</li>
+            <li><strong>inline-block:</strong> ナビゲーションメニューやボタングループなど横並びで幅や高さを指定したい場合に</li>
+            <li><strong>flex:</strong> 一次元の柔軟なレイアウト（ナビゲーション、カードレイアウトなど）に</li>
+            <li><strong>grid:</strong> 複雑な二次元レイアウト（ダッシュボードやフォトギャラリーなど）に</li>
+            <li><strong>none:</strong> 条件付きで要素を非表示にする場合に（モーダルウィンドウ、アコーディオンなど）</li>
+        </ul>
+    </div>
+</body>
+</html>
