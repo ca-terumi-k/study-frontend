@@ -59,3 +59,23 @@ body {
   color: #555; /* グレーの文字色 */
   margin-top: 8px;
 }
+
+/* 子孫セレクターの例のスタイル */
+.ancestor {
+  background-color: #e0f7fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.ancestor p {
+  color: #006064;
+  font-weight: bold;
+}
+
+.ancestor .descendant p {
+  color: #00838f;
+  margin-left: 20px;
+  font-weight: normal;
+}
